@@ -1,0 +1,94 @@
+version: "3.4"
+
+volumes:
+  redis_data:
+    driver: local
+
+networks:
+  skynet:
+    driver: bridge
+
+services:
+  perspective:
+    depends_on:
+      - redis
+    hostname: perspective
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    command: ["yarn", "start"]
+    restart: always
+    volumes:
+      - ./server:/usr/perspective
+      - /usr/perspective/node_modules
+    ports:
+      - "5000:5000"
+    # env_file:
+    #   - journi/.development.env
+    networks:
+      - skynet
+
+  redis-commander:
+    container_name: redis-commander
+    hostname: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    networks:
+      - skynet
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+    ports:
+      - "8081:8081"
+
+  redis:
+    hostname: redis
+    image: bitnami/redis:latest
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      # - REDIS_PASSWORD=h67Mo8Umhks0kOUUeMxLhD3l6FI3x0Qp
+      # - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL,CONFIG
+    command: /opt/bitnami/scripts/redis/run.sh --maxmemory 100mb
+    networks:
+      - skynet
+    ports:
+      - target: 6379
+        published: 6379
+        protocol: tcp
+        mode: ingress
+    volumes:
+      - ./containers-data/redis:/data
+
+  mongo-express:
+    image: mongo-express
+    ports:
+      - "8888:8081"
+    networks:
+      - skynet
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_ENABLE_ADMIN=true
+      - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+      - ME_CONFIG_BASICAUTH_USERNAME=admin
+      - ME_CONFIG_BASICAUTH_PASSWORD=supersecret
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=super
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=Y3GZLO6fom4HxlIVm5rlTzarSvKp5UxE
+      - ME_CONFIG_MONGODB_AUTH_USERNAME=super
+      - ME_CONFIG_MONGODB_AUTH_PASSWORD=Y3GZLO6fom4HxlIVm5rlTzarSvKp5UxE
+    depends_on:
+      - mongo
+
+  mongo:
+    hostname: mongo
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./containers-data/db:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: super
+      MONGO_INITDB_ROOT_PASSWORD: Y3GZLO6fom4HxlIVm5rlTzarSvKp5UxE
+    networks:
+      - skynet
+    logging:
+      driver: none

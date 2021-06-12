@@ -1,0 +1,82 @@
+{
+  "name": "journi-assignment",
+  "version": "1.0.0",
+  "description": "Prove of experience",
+  "main": "index.js",
+  "scripts": {
+    "start": "BUILD_ENV=development LOG_LEVEL=debug VERSION=$npm_package_version REDIS_HOST=redis REDIS_PASSWORD=h67Mo8Umhks0kOUUeMxLhD3l6FI3x0Qp MONGODB_PASS=Y3GZLO6fom4HxlIVm5rlTzarSvKp5UxE webpack --watch --mode development",
+    "build": "BUILD_ENV=production LOG_LEVEL=error VERSION=$npm_package_version REDIS_HOST=redis REDIS_PASSWORD=Tqz5oOJyUXA3YSglr0UUQpCge23FijBI MONGODB_PASS=Y3GZLO6fom4HxlIVm5rlTzarSvKp5UxE webpack --mode production",
+    "lint": "eslint src/ --ext .ts",
+    "lint:fix": "npm run lint:r -- --fix",
+    "serve": "node dist/app.production.js",
+    "prettify": "prettier --write src",
+    "test": "jest",
+    "test:debug": "jest --watchAll"
+  },
+  "keywords": [
+    "Assignment"
+  ],
+  "author": "Ahmed B. HAMEED",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bluebird": "^3.5.35",
+    "@types/bull": "^3.15.1",
+    "@types/cors": "^2.8.10",
+    "@types/express": "^4.17.11",
+    "@types/express-session": "^1.17.3",
+    "@types/faker": "^5.5.6",
+    "@types/hapi__joi": "^17.1.6",
+    "@types/ioredis": "^4.26.4",
+    "@types/lodash": "^4.14.170",
+    "@types/node": "^15.0.2",
+    "@types/sanitize-html": "^2.3.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "faker": "^5.5.3",
+    "gts": "^3.1.0",
+    "husky": "^6.0.0",
+    "jest-in-case": "^1.0.2",
+    "lint-staged": "^11.0.0",
+    "nodemon": "^2.0.7",
+    "nodemon-webpack-plugin": "^4.5.2",
+    "prettier": "^2.2.1",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.7.0",
+    "webpack-node-externals": "^3.0.0"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bluebird": "^3.7.2",
+    "bull": "^3.22.8",
+    "bull-board": "^2.1.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.7",
+    "helmet": "^4.6.0",
+    "ioredis": "^4.27.5",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.12.13",
+    "reflect-metadata": "^0.1.13",
+    "sanitize-html": "^2.3.3",
+    "ulid": "^2.3.0",
+    "winston": "^3.3.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc --noEmit --skipLibCheck && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,tsx}": [
+      "eslint --fix"
+    ]
+  }
+}
