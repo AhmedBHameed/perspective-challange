@@ -125,7 +125,7 @@ If i understand that correctly then:
 
 # Testing
 
-To run testing we need to run redis server first. We count on `docker` to male the test. This does not make sense to me because unit test should be independent but seems mocking `redis` functionality is too way complicated.
+To run testing we need to run redis server first. We count on `docker` to run the test. This does not make sense to me because unit test should be independent but seems mocking `redis` functionality is too way complicated.
 
 So let us make it short.
 
@@ -134,4 +134,4 @@ So let us make it short.
 
 # Conclusion
 
-_So while searching for some discussion about testing Bull.js, I found `nust.js` is already support `@nust-bull` library. It might be easier with unit test but there is no time to fallback from express. Another reason is that i did not use `nuxt.js` so that would be extra time and complexity to thing about. However, I'm also happy to wreck the test using express.js_
+_So while searching for some discussion about testing Bull.js, I found `nest.js` is already support `@nest-bull` library. It might be easier with unit test but there is no time to fallback from express. Another reason is that i did not use `nest.js` so that would be extra time and complexity to think about. However, I'm also happy to wreck the test using express.js_
