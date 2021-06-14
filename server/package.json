@@ -44,7 +44,6 @@
     "faker": "^5.5.3",
     "gts": "^3.1.0",
     "husky": "^6.0.0",
-    "ioredis-mock": "^5.6.0",
     "jest": "^27.0.4",
     "jest-in-case": "^1.0.2",
     "lint-staged": "^11.0.0",
