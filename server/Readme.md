@@ -1,5 +1,3 @@
-# Journi challenge
-
 ## How to run
 
 - Docker is recommended.
