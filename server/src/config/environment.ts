@@ -1,9 +1,10 @@
-const {BUILD_ENV, LOG_LEVEL, MONGODB_PASS, VERSION} = process.env;
+const {BUILD_ENV, NODE_ENV, LOG_LEVEL, MONGODB_PASS, VERSION} = process.env;
 
 const isProd = BUILD_ENV === 'production';
 
 const port = '5000';
 const allowDomains = ['http://localhost:5000'];
+const isTestEnv = NODE_ENV === 'test';
 
 export default {
   allowDomains,
@@ -23,7 +24,7 @@ export default {
     user: 'super',
   },
   redis: {
-    host: 'redis',
+    host: isTestEnv ? '172.28.0.201' : 'redis',
     port: parseInt(process.env.REDIS_PORT || '6379'),
   },
 };

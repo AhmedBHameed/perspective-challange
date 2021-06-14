@@ -21,6 +21,11 @@ perspective_1  |
 perspective_1  | 	🛡️ ###########################🛡️
 ```
 
+# APIs
+
+- `/api/v1/funnel` for fetching funnel.
+- `/api/v1/mutate-session` for posting new session.
+
 # SERVICES:
 
 This applications comes with few helpful services that ease our life. Services are:
@@ -114,4 +119,17 @@ If i understand that correctly then:
 
 > **A6:** `clientPersistentId` is generated the first time a user visits a funnel and will be saved as persistent cookie
 
-**I guess `clientPersistentId` is part of another `user` document. However, we are going to mock it with hard coded data to prevent any complication. This token will be controlled by cookies with `http` flag set to `true` to prevent cookies accessibility in front-end**
+**I guess `clientPersistentId` is part of another `Authentication` system. However, we are going to mock it with `objectID` data to prevent any complication. This token will be controlled by cookies with `httpOnly` flag set to `true` to prevent cookies accessibility in front-end. If a new request comes with cookies that has `clientPersistentId`, we pass overwriting the cookies**
+
+# Testing
+
+To run testing we need to run redis server first. We count on `docker` to male the test. This does not make sense to me because unit test should be independent but seems mocking `redis` functionality is too way complicated.
+
+So let us make it short.
+
+- run redis server from `docker-compose.yml` file.
+- execute `yarn test:debug` which run the test with watch mode.
+
+# Conclusion
+
+_So while searching for some discussion about testing Bull.js, I found `nust.js` is already support `@nust-bull` library. It might be easier with unit test but there is no time to fallback from express. Another reason is that i did not use `nuxt.js` so that would be extra time and complexity to thing about. However, I'm also happy to wreck the test using express.js_

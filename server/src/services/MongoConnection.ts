@@ -1,6 +1,6 @@
 import bluebird from 'bluebird';
 import {connect, Mongoose, set} from 'mongoose';
-import logger from 'src/services/Logger';
+import {logger} from '../services/Logger';
 
 import environment from '../config/environment';
 

@@ -1,3 +1,3 @@
 import {JobId} from 'bull';
 
-export const getSessionIdAndTimestamp = (jobId?: JobId) => (jobId ? jobId.toString().split(':') : '');
+export const getSessionIdAndTimestamp = (jobId: JobId) => jobId.toString().split(':');

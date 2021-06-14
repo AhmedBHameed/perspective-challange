@@ -1,9 +1,9 @@
 import Bull from 'bull';
-import environment from 'src/config/environment';
+import environment from '../../config/environment';
 import sessionProcess from '../processes/session.process';
 import {createBullBoard} from 'bull-board';
 import {BullAdapter} from 'bull-board/bullAdapter';
-import logger from 'src/services/Logger';
+import {logger} from '../../services/Logger';
 
 const {redis} = environment;
 

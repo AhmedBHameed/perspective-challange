@@ -1,8 +1,13 @@
-import {Job} from 'bull';
-import mutateSessionUseCase from 'src/use-case/MutateSession.usecase';
+import {DoneCallback, Job} from 'bull';
+import upsertMutateSessionData from '../../use-case/MutateSession/MutateSession.usecase';
 
-const sessionProcess = async (job: Job) => {
-  return await mutateSessionUseCase.run(job.data);
+const sessionProcess = async (job: Job, done: DoneCallback) => {
+  try {
+    const data = await upsertMutateSessionData(job.data);
+    done(null, data);
+  } catch (error) {
+    done(error, null);
+  }
 };
 
 export default sessionProcess;

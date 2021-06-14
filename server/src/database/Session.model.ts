@@ -1,5 +1,5 @@
 import {Document, model, Schema} from 'mongoose';
-import {genTimestamp} from 'src/util/generateTimestamp';
+import {genTimestamp} from '../util/generateTimestamp';
 
 export interface SessionModel {
   localId?: string;

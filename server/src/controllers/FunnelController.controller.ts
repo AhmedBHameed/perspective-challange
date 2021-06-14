@@ -1,5 +1,5 @@
 import {Request, Response} from 'express';
-import {objectId} from 'src/util/generateObjectId';
+import objectId from '../util/generateObjectId';
 
 /**
  * I'm not sure what are the purpose of points 5,6 in the assignment, but i guess those are

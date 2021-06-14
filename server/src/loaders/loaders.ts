@@ -3,10 +3,10 @@ import 'reflect-metadata';
 import cors from 'cors';
 import express from 'express';
 import xss from 'src/services/xss-clean';
-import initLogger from 'src/util/initLogger';
+
 import logWelcome from 'src/util/logWelcome';
 import helmet from 'helmet';
-import logger from 'src/services/Logger';
+import {bindLoggerToGlobalErrorHandlers, logger} from 'src/services/Logger';
 import PageNotFoundController from 'src/controllers/PageNotFound.controller';
 import environment from 'src/config/environment';
 import MutateSessionController from 'src/controllers/MutateSession.controller';
@@ -18,7 +18,7 @@ import FunnelController from 'src/controllers/FunnelController.controller';
 const {port, allowDomains, apiVersion} = environment;
 
 export default async (): Promise<void> => {
-  initLogger();
+  bindLoggerToGlobalErrorHandlers();
   await connectRedis();
   await mongoConnection.connect();
 
